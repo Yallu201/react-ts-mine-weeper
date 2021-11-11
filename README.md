@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# 지뢰찾기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React.js 와 TypeScript로 제작한 게임입니다.
 
-## Available Scripts
+## 게임의 룰
 
-In the project directory, you can run:
+#### 1. 난이도 선택
 
-### `yarn start`
+- 초급: `9` x `9`, `지뢰` 10개
+- 중급: `16` x `16`, `지뢰` 40개
+- 고급: `29` x `15`, `지뢰` 99개
+- 커스텀: `Max 80` x `Max 80`, 최대 999개 `지뢰`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### 2. 게임 시작
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 하단의 `cell`에 클릭 시 게임을 시작합니다.
+- 단, 첫번째로 클릭한 `cell` 은 지뢰가 없습니다.
+- 지뢰는 랜덤으로 배치됩니다.
 
-### `yarn test`
+#### 3. 게임 중
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `cell`에 입력된 숫자는 주변 `지뢰`의 갯수 입니다.
+- 마우스 우측 클릭 시 `cell`에 깃발로 **지뢰를 표시할 수 있습니다**.
+- `cell`에 입력된 숫자 주변에 모든 지뢰를 표시했다면, 마우스 좌측, 우측을 동시에 클릭 시 **지뢰가 없는 `cell`을 모두 공개합니다**.
 
-### `yarn build`
+#### 3.1 종료(지뢰 선택 시)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **모든 지뢰의 위치에 지뢰 아이콘을 표시**하며 `cell`을 클릭해도 반응하지 않습니다.
+- 초기화 버튼을 클릭하여 게임을 다시 시도할 수 있습니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 3.2 종료(지뢰를 제외한 모든 `cell` 공개)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **모든 지뢰의 위치에 깃발을 표시**하며 `cell`을 클릭해도 반응하지 않습니다.
+- 초기화 버튼을 클릭하여 게임을 다시 시도할 수 있습니다.
 
-### `yarn eject`
+## 구성요소
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 1. 상단 헤더
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 남은 지뢰 개수 표시
+- 게임 리셋 버튼
+- 게임 시작 후 소요 시간 표시(단위: 초)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 2. 하단 `cell` 영역
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- 게임 시작 전, 모든 `cell`은 비공개 상태
+- 첫 클릭 시, 모든 `cell`의 상태가 결정  
+  (단, 첫 클릭 `cell`은 지뢰가 아님)
 
-## Learn More
+## 사용 모듈 정리
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+    react
+    typescript
+    mobx
+    mobx-react
+```
