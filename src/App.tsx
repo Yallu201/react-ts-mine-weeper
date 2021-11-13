@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from "react";
+import "./App.css";
+import { Header, CellArea } from "./components";
 
 function App() {
+  const [mineCount, setMineCount] = useState(10);
+  const [timeSpent, setTimeSpent] = useState(0);
+  const [stopwatch, setStopwatch] = useState<NodeJS.Timeout | null>(null);
+  const onClickReset = useCallback(() => {
+    stopwatch && clearInterval(stopwatch);
+    setTimeSpent(0);
+  }, [stopwatch]);
+  const onClickCell = useCallback(() => {
+    const timmer_ = setInterval(() => {
+      setTimeSpent((time) => time + 1);
+    }, 1000);
+    setStopwatch(timmer_);
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header
+        mineCount={mineCount}
+        timeSpent={timeSpent}
+        onClickReset={onClickReset}
+      />
+      <CellArea onClickCell={onClickCell} />
     </div>
   );
 }
