@@ -1,0 +1,13 @@
+:root {
+  --background-color: #f7f7f7;
+  --border-color-shadow: #808080;
+}
+body {
+  background-color: var(--background-color);
+}
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
