@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import "./App.css";
+import { Header } from "./components";
 
 function App() {
   const [mineCount, setMineCount] = useState(10);
@@ -17,11 +18,11 @@ function App() {
   }, []);
   return (
     <div className="container">
-      <div className="header-wrap">
-        <input type="text" value={mineCount} />
-        <button onClick={onClickReset}>reset</button>
-        <input type="text" value={timeSpent} />
-      </div>
+      <Header
+        mineCount={mineCount}
+        timeSpent={timeSpent}
+        onClickReset={onClickReset}
+      />
       <div className="cell-area-wrap">
         <button onClick={onClickCell}>This is first cell</button>
       </div>
