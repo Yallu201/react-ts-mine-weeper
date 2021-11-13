@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import "./App.css";
-import { Header } from "./components";
+import { Header, CellArea } from "./components";
 
 function App() {
   const [mineCount, setMineCount] = useState(10);
@@ -23,9 +23,7 @@ function App() {
         timeSpent={timeSpent}
         onClickReset={onClickReset}
       />
-      <div className="cell-area-wrap">
-        <button onClick={onClickCell}>This is first cell</button>
-      </div>
+      <CellArea onClickCell={onClickCell} />
     </div>
   );
 }
