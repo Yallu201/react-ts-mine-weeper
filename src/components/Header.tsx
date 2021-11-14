@@ -7,7 +7,7 @@ type HeaderProps = {
 };
 const Header = ({ mineCount, onClickReset, timeSpent }: HeaderProps) => {
   return (
-    <div className="header-warp">
+    <div className="header-wrap">
       <input type="text" value={mineCount} />
       <button onClick={onClickReset}>reset</button>
       <input type="text" value={timeSpent} />

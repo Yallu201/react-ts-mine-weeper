@@ -1,7 +1,7 @@
 import { makeObservable, observable } from "mobx";
 
 type CellIndex = number | null;
-export class Cell {
+export default class Cell {
   __row: CellIndex = null;
   __column: CellIndex = null;
   __isOpened: boolean = false;

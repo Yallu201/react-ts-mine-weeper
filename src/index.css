@@ -1,0 +1,15 @@
+:root {
+  --background-color: #f7f7f7;
+  --button-background-color: #c6c6c6;
+  --border-color-white: #f7f7f7;
+  --border-color-shadow: #808080;
+}
+body {
+  background-color: var(--background-color);
+}
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

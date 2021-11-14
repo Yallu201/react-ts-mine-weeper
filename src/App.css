@@ -1,0 +1,55 @@
+.container {
+  border-width: 10px;
+  border-top-color: var(--border-color-white);
+  border-right-color: var(--border-color-shadow);
+  border-bottom-color: var(--border-color-shadow);
+  border-left-color: var(--border-color-white);
+  border-style: solid;
+
+  background-color: #c6c6c6;
+  padding: 10px;
+}
+
+.header-wrap,
+.cell-area-wrap {
+  border-width: 10px;
+  border-top-color: var(--border-color-shadow);
+  border-right-color: var(--border-color-white);
+  border-bottom-color: var(--border-color-white);
+  border-left-color: var(--border-color-shadow);
+  border-style: solid;
+}
+.header-wrap {
+  padding: 0.25rem;
+}
+.board {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.cell {
+  flex: 1;
+  height: 2.5rem;
+  border-width: 0.25rem;
+  border-top-color: var(--border-color-white);
+  border-right-color: var(--border-color-shadow);
+  border-bottom-color: var(--border-color-shadow);
+  border-left-color: var(--border-color-white);
+  background-color: var(--button-background-color);
+  border-style: solid;
+}
+
+.cell:active,
+.open {
+  border-top-color: var(--button-background-color);
+  border-right-color: var(--button-background-color);
+  border-bottom-color: var(--button-background-color);
+  border-left-color: var(--button-background-color);
+}
+.mine {
+  background-color: black;
+}
