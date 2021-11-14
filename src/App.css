@@ -43,9 +43,13 @@
   border-style: solid;
 }
 
-.cell:active {
+.cell:active,
+.open {
   border-top-color: var(--button-background-color);
   border-right-color: var(--button-background-color);
   border-bottom-color: var(--button-background-color);
   border-left-color: var(--button-background-color);
+}
+.mine {
+  background-color: black;
 }
