@@ -1,12 +1,9 @@
 import { observer } from "mobx-react-lite";
-import { MouseEventHandler, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { BoardStore } from "../store";
 import CellComponent from "./Cell";
 
-type CellAreaProps = {
-  onClickCell: MouseEventHandler<HTMLButtonElement> | undefined;
-};
-const CellArea = observer(({ onClickCell }: CellAreaProps) => {
+const CellArea = observer(() => {
   const [board] = useState<BoardStore>(new BoardStore());
   const setMine = useCallback(() => {
     if (!board) return;

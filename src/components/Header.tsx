@@ -1,16 +1,12 @@
-import React, { MouseEventHandler } from "react";
+import { useGameStore } from "../store/Game";
 
-type HeaderProps = {
-  mineCount: number;
-  onClickReset: MouseEventHandler<HTMLElement> | undefined;
-  timeSpent: number;
-};
-const Header = ({ mineCount, onClickReset, timeSpent }: HeaderProps) => {
+const Header = () => {
+  const store = useGameStore();
   return (
     <div className="header-wrap">
-      <input type="text" value={mineCount} />
-      <button onClick={onClickReset}>reset</button>
-      <input type="text" value={timeSpent} />
+      <input type="text" value={store.mineCount} />
+      <button onClick={store.reset}>reset</button>
+      <input type="text" value={store.seconds} />
     </div>
   );
 };
