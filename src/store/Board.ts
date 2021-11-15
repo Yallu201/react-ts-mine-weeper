@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
-import { Cell } from ".";
+import { CellStore } from ".";
 import CellRow from "./Row";
 
 export default class BoardStore {
@@ -17,7 +17,7 @@ export default class BoardStore {
     for (let i = 0; i < this.__rowCount; i++) {
       const row = new CellRow(i, []);
       for (let j = 0; j < this.__columnCount; j++) {
-        const cell = new Cell(i, j);
+        const cell = new CellStore(i, j);
         row.push(cell);
       }
       this.__cellRows.push(row);

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { useCallback } from "react";
-import { Cell } from "../store";
-type CellProps = { cell: Cell; setMine: () => void };
+import { CellStore } from "../store";
+type CellProps = { cell: CellStore; setMine: () => void };
 const CellComponent = observer(({ cell, setMine }: CellProps) => {
   const onClick = useCallback(() => {
     setMine();
