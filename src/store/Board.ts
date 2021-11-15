@@ -2,7 +2,7 @@ import { action, makeObservable, observable } from "mobx";
 import { Cell } from ".";
 import CellRow from "./Row";
 
-export default class Board {
+export default class BoardStore {
   __clickCount: number;
   __rowCount: number;
   __columnCount: number;
