@@ -2,7 +2,7 @@ import { makeObservable, observable } from "mobx";
 import Cell from "./Cell";
 
 type RowIndex = number | null;
-export default class CellRow {
+export default class RowStore {
   __index: RowIndex = null;
   __cells: Cell[];
 
