@@ -55,32 +55,32 @@ export default class Board {
     this.cellRows[row].cells[col].isMine = true;
 
     if (!isTopRow) {
-      // ■■■
-      // □□□
-      // □□□
-      this.cellRows[row - 1].cells[col].mineCount += 1;
+      // ■□□  □■□  □□■
+      // □□□  □□□  □□□
+      // □□□  □□□  □□□
       if (!isLeftColumn) {
         this.cellRows[row - 1].cells[col - 1].mineCount += 1;
       }
+      this.cellRows[row - 1].cells[col].mineCount += 1;
       if (!isRightColumn) {
         this.cellRows[row - 1].cells[col + 1].mineCount += 1;
       }
     }
     if (!isBottomRow) {
-      // □□□
-      // □□□
-      // ■■■
-      this.cellRows[row + 1].cells[col].mineCount += 1;
+      // □□□ □□□ □□□
+      // □□□ □□□ □□□
+      // ■□□ □■□ □□■
       if (!isLeftColumn) {
         this.cellRows[row + 1].cells[col - 1].mineCount += 1;
       }
+      this.cellRows[row + 1].cells[col].mineCount += 1;
       if (!isRightColumn) {
         this.cellRows[row + 1].cells[col + 1].mineCount += 1;
       }
     }
-    // □□□
-    // ■□■
-    // □□□
+    // □□□ □□□
+    // ■□□ □□■
+    // □□□ □□□
     if (!isLeftColumn) {
       this.cellRows[row].cells[col - 1].mineCount += 1;
     }
