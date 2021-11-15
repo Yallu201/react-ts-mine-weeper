@@ -28,7 +28,7 @@ const CellArea = observer(({ onClickCell }: CellAreaProps) => {
     <div className="cell-area-wrap">
       <div className="board">
         {board &&
-          board.cellRows.map((row) => {
+          board.rows.map((row) => {
             return (
               <div className="row">
                 {row.cells.map((cell) => {

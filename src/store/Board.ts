@@ -1,30 +1,29 @@
 import { action, makeObservable, observable } from "mobx";
-import { CellStore } from ".";
-import CellRow from "./Row";
+import { CellStore, RowStore } from ".";
 
 export default class BoardStore {
   __clickCount: number;
   __rowCount: number;
   __columnCount: number;
-  __cellRows: CellRow[];
+  __rows: RowStore[];
 
   constructor() {
     this.__clickCount = 0;
     this.__rowCount = 9;
     this.__columnCount = 9;
-    this.__cellRows = [];
+    this.__rows = [];
 
     for (let i = 0; i < this.__rowCount; i++) {
-      const row = new CellRow(i, []);
+      const row = new RowStore(i, []);
       for (let j = 0; j < this.__columnCount; j++) {
         const cell = new CellStore(i, j);
         row.push(cell);
       }
-      this.__cellRows.push(row);
+      this.__rows.push(row);
     }
 
     makeObservable(this, {
-      __cellRows: observable,
+      __rows: observable,
       __rowCount: observable,
       __columnCount: observable,
       setMine: action,
@@ -37,14 +36,14 @@ export default class BoardStore {
   set clickCount(count: number) {
     this.__clickCount = count;
   }
-  get cellRows(): CellRow[] {
-    return this.__cellRows;
+  get rows(): RowStore[] {
+    return this.__rows;
   }
-  set cellRows(rows: CellRow[]) {
-    this.__cellRows = rows;
+  set rows(rows: RowStore[]) {
+    this.__rows = rows;
   }
-  push(row: CellRow) {
-    this.__cellRows.push(row);
+  push(row: RowStore) {
+    this.__rows.push(row);
   }
   setMine(row: number, col: number) {
     const isTopRow = row === 0;
@@ -52,18 +51,18 @@ export default class BoardStore {
     const isLeftColumn = col === 0;
     const isRightColumn = col === this.__columnCount - 1;
 
-    this.cellRows[row].cells[col].isMine = true;
+    this.rows[row].cells[col].isMine = true;
 
     if (!isTopRow) {
       // ■□□  □■□  □□■
       // □□□  □□□  □□□
       // □□□  □□□  □□□
       if (!isLeftColumn) {
-        this.cellRows[row - 1].cells[col - 1].mineCount += 1;
+        this.rows[row - 1].cells[col - 1].mineCount += 1;
       }
-      this.cellRows[row - 1].cells[col].mineCount += 1;
+      this.rows[row - 1].cells[col].mineCount += 1;
       if (!isRightColumn) {
-        this.cellRows[row - 1].cells[col + 1].mineCount += 1;
+        this.rows[row - 1].cells[col + 1].mineCount += 1;
       }
     }
     if (!isBottomRow) {
@@ -71,21 +70,21 @@ export default class BoardStore {
       // □□□ □□□ □□□
       // ■□□ □■□ □□■
       if (!isLeftColumn) {
-        this.cellRows[row + 1].cells[col - 1].mineCount += 1;
+        this.rows[row + 1].cells[col - 1].mineCount += 1;
       }
-      this.cellRows[row + 1].cells[col].mineCount += 1;
+      this.rows[row + 1].cells[col].mineCount += 1;
       if (!isRightColumn) {
-        this.cellRows[row + 1].cells[col + 1].mineCount += 1;
+        this.rows[row + 1].cells[col + 1].mineCount += 1;
       }
     }
     // □□□ □□□
     // ■□□ □□■
     // □□□ □□□
     if (!isLeftColumn) {
-      this.cellRows[row].cells[col - 1].mineCount += 1;
+      this.rows[row].cells[col - 1].mineCount += 1;
     }
     if (!isRightColumn) {
-      this.cellRows[row].cells[col + 1].mineCount += 1;
+      this.rows[row].cells[col + 1].mineCount += 1;
     }
   }
 }
