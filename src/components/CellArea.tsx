@@ -1,26 +1,29 @@
-import { MouseEventHandler, useEffect, useState } from "react";
-import { Cell, CellRow, CellBoard } from "../store";
+import { observer } from "mobx-react-lite";
+import { MouseEventHandler, useCallback, useState } from "react";
+import { CellBoard } from "../store";
 import CellComponent from "./Cell";
 
 type CellAreaProps = {
   onClickCell: MouseEventHandler<HTMLButtonElement> | undefined;
 };
-const CellArea = ({ onClickCell }: CellAreaProps) => {
-  const [board, setBoard] = useState<CellBoard | null>(null);
-  useEffect(() => {
+const CellArea = observer(({ onClickCell }: CellAreaProps) => {
+  const [board] = useState<CellBoard>(new CellBoard());
+  const setMine = useCallback(() => {
+    if (!board) return;
+    if (board.clickCount > 0) return;
+    board.clickCount += 1;
     const [ROW, COL] = [9, 9];
-    const board_ = new CellBoard([]);
-    for (let i = 0; i < ROW; i++) {
-      const row = new CellRow(i, []);
-      for (let j = 0; j < COL; j++) {
-        const cell = new Cell(i, j);
-        row.push(cell);
-      }
-      board_.push(row);
+    const TOTAL_CELL_COUNT = ROW * COL;
+    const set = new Set();
+    while (set.size < 10) {
+      const mineIndex = Math.floor(Math.random() * TOTAL_CELL_COUNT);
+      if (set.has(mineIndex)) continue;
+      set.add(mineIndex);
+      const row = Math.floor(mineIndex / ROW);
+      const col = mineIndex % ROW;
+      board.setMine(row, col);
     }
-    console.log(board_);
-    setBoard(board_);
-  }, []);
+  }, [board]);
   return (
     <div className="cell-area-wrap">
       <div className="board">
@@ -29,7 +32,7 @@ const CellArea = ({ onClickCell }: CellAreaProps) => {
             return (
               <div className="row">
                 {row.cells.map((cell) => {
-                  return <CellComponent cell={cell} />;
+                  return <CellComponent cell={cell} setMine={setMine} />;
                 })}
               </div>
             );
@@ -37,6 +40,6 @@ const CellArea = ({ onClickCell }: CellAreaProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default CellArea;
