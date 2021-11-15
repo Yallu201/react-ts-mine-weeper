@@ -38,6 +38,7 @@ export default class GameStore {
 }
 
 export const GameContext = createContext<GameStore>(new GameStore());
+// .tsx 파일에서만 jsx 문법 사용가능
 export const GameProvider: FC<{ store: GameStore }> = ({ store, children }) => {
   return <GameContext.Provider value={store}>{children}</GameContext.Provider>;
 };
