@@ -13,7 +13,9 @@ export default class BoardStore {
             __rows: observable,
             __rowCount: observable,
             __columnCount: observable,
+            push:action,
             setMine: action,
+            init:action,
         });
     }
 
