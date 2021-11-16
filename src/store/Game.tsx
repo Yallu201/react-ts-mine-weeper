@@ -41,12 +41,14 @@ export default class GameStore {
     this.__isGameOver = false;
     if (!this.__interval) return;
     clearInterval(this.__interval);
+    this.__interval = null;
   }
 
   gameOver() {
     this.__isGameOver = true;
     if (!this.__interval) return;
     clearInterval(this.__interval);
+    this.__interval = null;
   }
 }
 
