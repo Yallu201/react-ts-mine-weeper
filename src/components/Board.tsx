@@ -24,11 +24,11 @@ const Board = observer(() => {
     <div className="cell-area-wrap">
       <div className="board">
         {board &&
-          board.rows.map((row) => {
+          board.rows.map((row,r_index) => {
             return (
-              <div className="row">
-                {row.cells.map((cell) => {
-                  return <CellComponent cell={cell} setMine={setMine} />;
+              <div className="row" key={`row_${r_index}`}>
+                {row.cells.map((cell,c_index) => {
+                  return <CellComponent key={`col_${r_index}_${c_index}`} cell={cell} setMine={setMine} />;
                 })}
               </div>
             );
