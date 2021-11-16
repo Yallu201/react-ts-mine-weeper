@@ -1,17 +1,20 @@
 import { observer } from "mobx-react";
 import { useCallback } from "react";
+import { useBoardStore } from "../store/Board";
 import { useGameStore } from "../store/Game";
 
 const Header = observer(() => {
-  const store = useGameStore();
+  const boardStore = useBoardStore();
+  const gameStore = useGameStore();
   const onReset = useCallback(() => {
-    store.reset();
+    gameStore.reset();
+    boardStore.init();
   }, []);
   return (
     <div className="header-wrap">
-      <input type="text" value={store.mineCount} />
+      <input type="text" value={gameStore.mineCount} />
       <button onClick={onReset}>reset</button>
-      <input type="text" value={store.seconds} />
+      <input type="text" value={gameStore.seconds} />
     </div>
   );
 });
