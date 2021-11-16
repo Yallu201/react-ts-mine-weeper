@@ -35,7 +35,6 @@ export default class GameStore {
   }
 
   reset() {
-    this.__interval = null;
     this.__seconds = 0;
     this.__mineCount = 10;
     this.__isGameOver = false;
