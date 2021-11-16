@@ -25,7 +25,8 @@ export default class GameStore {
     this.__seconds += 1;
   }
   start() {
-    this.__interval = setInterval(this.addSecond, ONE_SECOND);
+    if(this.__interval) return;
+    this.__interval = setInterval(this.addSecond.bind(this), ONE_SECOND);
   }
 
   reset() {
