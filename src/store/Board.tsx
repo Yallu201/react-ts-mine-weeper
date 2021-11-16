@@ -1,6 +1,7 @@
 import { action, makeObservable, observable } from "mobx";
 import { createContext, FC, useContext } from "react";
-import { CellStore, RowStore } from ".";
+import CellStore from "./Cell";
+import RowStore from "./Row";
 
 export default class BoardStore {
     __clickCount: number = 0;
@@ -9,6 +10,7 @@ export default class BoardStore {
     __rows: RowStore[] = [];
 
     constructor() {
+        this.init();
         makeObservable(this, {
             __rows: observable,
             __rowCount: observable,
@@ -40,18 +42,18 @@ export default class BoardStore {
         const isLeftColumn = col === 0;
         const isRightColumn = col === this.__columnCount - 1;
 
-        this.rows[row].cells[col].isMine = true;
+        this.__rows[row].cells[col].isMine = true;
 
         if (!isTopRow) {
             // ■□□  □■□  □□■
             // □□□  □□□  □□□
             // □□□  □□□  □□□
             if (!isLeftColumn) {
-                this.rows[row - 1].cells[col - 1].mineCount += 1;
+                this.__rows[row - 1].cells[col - 1].mineCount += 1;
             }
-            this.rows[row - 1].cells[col].mineCount += 1;
+            this.__rows[row - 1].cells[col].mineCount += 1;
             if (!isRightColumn) {
-                this.rows[row - 1].cells[col + 1].mineCount += 1;
+                this.__rows[row - 1].cells[col + 1].mineCount += 1;
             }
         }
         if (!isBottomRow) {
@@ -59,21 +61,21 @@ export default class BoardStore {
             // □□□ □□□ □□□
             // ■□□ □■□ □□■
             if (!isLeftColumn) {
-                this.rows[row + 1].cells[col - 1].mineCount += 1;
+                this.__rows[row + 1].cells[col - 1].mineCount += 1;
             }
-            this.rows[row + 1].cells[col].mineCount += 1;
+            this.__rows[row + 1].cells[col].mineCount += 1;
             if (!isRightColumn) {
-                this.rows[row + 1].cells[col + 1].mineCount += 1;
+                this.__rows[row + 1].cells[col + 1].mineCount += 1;
             }
         }
         // □□□ □□□
         // ■□□ □□■
         // □□□ □□□
         if (!isLeftColumn) {
-            this.rows[row].cells[col - 1].mineCount += 1;
+            this.__rows[row].cells[col - 1].mineCount += 1;
         }
         if (!isRightColumn) {
-            this.rows[row].cells[col + 1].mineCount += 1;
+            this.__rows[row].cells[col + 1].mineCount += 1;
         }
     }
 
@@ -89,7 +91,7 @@ export default class BoardStore {
                 const cell = new CellStore(i, j);
                 row.push(cell);
             }
-            this.__rows.push(row);
+            this.push(row);
         }
     }
 }
