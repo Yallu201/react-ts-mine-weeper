@@ -20,12 +20,14 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
     }
     setMine();
     gameStore.start();
-  }, [setMine, cell.isMine, cell.isOpened, gameStore.isGameOver, boardStore]);
+  }, [setMine, cell, boardStore, gameStore]);
 
   const content = useMemo(() => {
-    const { mineCount, isMine } = cell;
-    return isMine ? null : mineCount > 0 ? mineCount : null;
-  }, [cell.mineCount, cell.isMine]);
+    if (!cell.isMine && cell.mineCount > 0) {
+      return cell.mineCount;
+    }
+    return null;
+  }, [cell.isMine, cell.mineCount]);
 
   const className = useMemo(() => {
     const open = cell.isOpened ? (cell.isMine ? " mine open" : " open") : "";
