@@ -10,7 +10,7 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
     setMine();
     gameStore.start();
     cell.isOpened = true;
-  }, [setMine]);
+  }, [setMine,cell,gameStore]);
   return (
     <button
       className={`cell ${cell.isMine ? "mine" : ""} ${
