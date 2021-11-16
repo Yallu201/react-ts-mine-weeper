@@ -9,7 +9,7 @@ const Header = observer(() => {
   const onReset = useCallback(() => {
     gameStore.reset();
     boardStore.init();
-  }, []);
+  }, [gameStore,boardStore]);
   return (
     <div className="header-wrap">
       <input type="text" value={gameStore.mineCount} />
