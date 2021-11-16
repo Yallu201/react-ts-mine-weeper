@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 type CellIndex = number | null;
 export default class CellStore {
@@ -18,6 +18,7 @@ export default class CellStore {
       __isOpened: observable,
       __isMine: observable,
       __mineCount: observable,
+      open: action,
     });
   }
 
@@ -44,5 +45,9 @@ export default class CellStore {
   }
   set mineCount(count: number) {
     this.__mineCount = count;
+  }
+
+  open() {
+    this.__isOpened = true;
   }
 }
