@@ -3,7 +3,11 @@ import { useCallback, useMemo } from "react";
 import { CellStore } from "../store";
 import { useBoardStore } from "../store/Board";
 import { useGameStore } from "../store/Game";
-type CellProps = { cell: CellStore; setMine: () => void };
+import { CellIndex } from "../store/Cell";
+type CellProps = {
+  cell: CellStore;
+  setMine: (arg0: CellIndex, arg1: CellIndex) => void;
+};
 const CellComponent = observer(({ cell, setMine }: CellProps) => {
   const gameStore = useGameStore();
   const boardStore = useBoardStore();
@@ -18,7 +22,7 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
       gameStore.gameOver();
       return;
     }
-    setMine();
+    setMine(cell.row, cell.column);
     gameStore.start();
   }, [setMine, cell, boardStore, gameStore]);
 

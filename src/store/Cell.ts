@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from "mobx";
 
-type CellIndex = number | null;
+export type CellIndex = number | null;
 export default class CellStore {
   __row: CellIndex = null;
   __column: CellIndex = null;
