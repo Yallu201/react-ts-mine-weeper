@@ -18,6 +18,7 @@ export default class BoardStore {
             push:action,
             setMine: action,
             init:action,
+            openMines:action,
         });
     }
 
@@ -93,6 +94,16 @@ export default class BoardStore {
             }
             this.push(row);
         }
+    }
+
+    openMines(){
+        this.__rows.forEach(row=>{
+            row.cells.forEach(cell=>{
+                if(cell.isMine){
+                    cell.isOpened = true;
+                }
+            });
+        });
     }
 }
 
