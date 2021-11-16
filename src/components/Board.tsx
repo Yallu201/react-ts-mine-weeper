@@ -1,12 +1,11 @@
 import { observer } from "mobx-react-lite";
-import { useCallback, useState } from "react";
-import { BoardStore } from "../store";
+import { useCallback } from "react";
+import { useBoardStore } from "../store/Board";
 import CellComponent from "./Cell";
 
 const Board = observer(() => {
-  const [board] = useState<BoardStore>(new BoardStore());
+  const board = useBoardStore();
   const setMine = useCallback(() => {
-    if (!board) return;
     if (board.clickCount > 0) return;
     board.clickCount += 1;
     const [ROW, COL] = [9, 9];
