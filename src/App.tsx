@@ -1,15 +1,18 @@
-import { useCallback, useState } from "react";
 import "./App.css";
 import { Header, Board } from "./components";
+import { BoardProvider, useBoardStore } from "./store/Board";
 import { GameProvider, useGameStore } from "./store/Game";
 
 function App() {
   const gameStore = useGameStore();
+  const boardStore = useBoardStore();
   return (
     <div className="container">
       <GameProvider store={gameStore}>
-        <Header />
-        <Board />
+        <BoardProvider store={boardStore}>
+          <Header />
+          <Board />
+        </BoardProvider>
       </GameProvider>
     </div>
   );
