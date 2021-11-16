@@ -1,10 +1,14 @@
 import { observer } from "mobx-react";
 import { useCallback } from "react";
 import { CellStore } from "../store";
-type CellProps = { cell: CellStore; setMine: () => void };
+import { useGameStore } from "../store/Game";
+  type CellProps = { cell: CellStore; setMine: () => void };
 const CellComponent = observer(({ cell, setMine }: CellProps) => {
+  const gameStore = useGameStore();
+
   const onClick = useCallback(() => {
     setMine();
+    gameStore.start();
     cell.isOpened = true;
   }, [setMine]);
   return (
