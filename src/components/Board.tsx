@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { BoardStore } from "../store";
 import CellComponent from "./Cell";
 
-const CellArea = observer(() => {
+const Board = observer(() => {
   const [board] = useState<BoardStore>(new BoardStore());
   const setMine = useCallback(() => {
     if (!board) return;
@@ -39,4 +39,4 @@ const CellArea = observer(() => {
   );
 });
 
-export default CellArea;
+export default Board;

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import "./App.css";
-import { Header, CellArea } from "./components";
+import { Header, Board } from "./components";
 import { GameProvider, useGameStore } from "./store/Game";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="container">
       <GameProvider store={gameStore}>
         <Header />
-        <CellArea />
+        <Board />
       </GameProvider>
     </div>
   );
