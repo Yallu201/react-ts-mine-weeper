@@ -15,23 +15,29 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
     if (gameStore.isGameOver) {
       return;
     }
-    cell.open();
     if (cell.isMine) {
       // 지뢰인 경우, 게임 정지 및 모든 지뢰 표시
       boardStore.openMines();
       gameStore.gameOver();
+      cell.open();
       return;
     }
-    setMine(cell.row, cell.column);
-    gameStore.start();
+    if (!gameStore.isGameStart) {
+      setMine(cell.row, cell.column);
+      gameStore.start();
+    }
+    if (cell.mineCount === 0) {
+      boardStore.openEmptyCells(cell.row, cell.column);
+    }
+    cell.open();
   }, [setMine, cell, boardStore, gameStore]);
 
   const content = useMemo(() => {
-    if (!cell.isMine && cell.mineCount > 0) {
+    if (!cell.isMine && cell.isOpened && cell.mineCount > 0) {
       return cell.mineCount;
     }
     return null;
-  }, [cell.isMine, cell.mineCount]);
+  }, [cell.isMine, cell.mineCount, cell.isOpened]);
 
   const className = useMemo(() => {
     const open = cell.isOpened ? (cell.isMine ? " mine open" : " open") : "";
