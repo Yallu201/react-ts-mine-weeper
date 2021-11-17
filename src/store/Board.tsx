@@ -7,6 +7,7 @@ export default class BoardStore {
   __rowCount: number = 9;
   __columnCount: number = 9;
   __rows: RowStore[] = [];
+  __openCellCount: number = 0;
 
   constructor() {
     this.init();
@@ -14,12 +15,14 @@ export default class BoardStore {
       __rows: observable,
       __rowCount: observable,
       __columnCount: observable,
+      __openCellCount: observable,
       push: action,
       setMine: action,
       init: action,
       openMines: action,
       openEmptyCells: action,
       openCell: action,
+      addOpenCell: action,
     });
   }
 
@@ -35,9 +38,14 @@ export default class BoardStore {
   set rows(rows: RowStore[]) {
     this.__rows = rows;
   }
+  get openCellCount(): number {
+    return this.__openCellCount;
+  }
+
   push(row: RowStore) {
     this.__rows.push(row);
   }
+
   setMine(row: number, col: number) {
     const isTopRow = row === 0;
     const isBottomRow = row === this.__rowCount - 1;
@@ -86,6 +94,7 @@ export default class BoardStore {
     this.__rowCount = 9;
     this.__columnCount = 9;
     this.__rows = [];
+    this.__openCellCount = 0;
 
     for (let i = 0; i < this.__rowCount; i++) {
       const row = new RowStore(i, []);
@@ -116,11 +125,13 @@ export default class BoardStore {
     if (this.__rows[row].cells[col].isMine) return;
     if (this.__rows[row].cells[col].mineCount > 0) {
       this.__rows[row].cells[col].open();
+      this.addOpenCell();
       return;
     }
     if (this.__rows[row].cells[col].mineCount === 0) {
       if (this.__rows[row].cells[col].isOpened) return;
       this.__rows[row].cells[col].open();
+      this.addOpenCell();
     }
     const CURSOR = [
       [-1, -1],
@@ -139,6 +150,10 @@ export default class BoardStore {
       if (nextCol < 0 || nextCol >= this.__columnCount) return;
       this.openCell(row + offsetRow, col + offsetCol);
     });
+  }
+
+  addOpenCell() {
+    this.__openCellCount += 1;
   }
 }
 
