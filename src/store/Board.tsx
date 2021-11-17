@@ -123,13 +123,13 @@ export default class BoardStore {
   openCell(row: CellIndex, col: CellIndex) {
     if (row === null || col === null) return;
     if (this.__rows[row].cells[col].isMine) return;
+    if (this.__rows[row].cells[col].isOpened) return;
     if (this.__rows[row].cells[col].mineCount > 0) {
       this.__rows[row].cells[col].open();
       this.addOpenCell();
       return;
     }
     if (this.__rows[row].cells[col].mineCount === 0) {
-      if (this.__rows[row].cells[col].isOpened) return;
       this.__rows[row].cells[col].open();
       this.addOpenCell();
     }
