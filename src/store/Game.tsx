@@ -6,6 +6,7 @@ export default class GameStore {
   __mineCount: number = 10;
   __interval: NodeJS.Timeout | null = null;
   __isGameOver: boolean = false;
+  __isGameStart: boolean = false;
   constructor() {
     makeObservable(this, {
       __seconds: observable,
@@ -26,10 +27,14 @@ export default class GameStore {
   get isGameOver() {
     return this.__isGameOver;
   }
+  get isGameStart() {
+    return this.__isGameStart;
+  }
   addSecond() {
     this.__seconds += 1;
   }
   start() {
+    this.__isGameStart = true;
     if (this.__interval) return;
     this.__interval = setInterval(this.addSecond.bind(this), ONE_SECOND);
   }
@@ -37,6 +42,7 @@ export default class GameStore {
   reset() {
     this.__seconds = 0;
     this.__mineCount = 10;
+    this.__isGameStart = false;
     this.__isGameOver = false;
     if (!this.__interval) return;
     clearInterval(this.__interval);
