@@ -33,11 +33,11 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
   }, [setMine, cell, boardStore, gameStore]);
 
   const content = useMemo(() => {
-    if (!cell.isMine && cell.mineCount > 0) {
+    if (!cell.isMine && cell.isOpened && cell.mineCount > 0) {
       return cell.mineCount;
     }
     return null;
-  }, [cell.isMine, cell.mineCount]);
+  }, [cell.isMine, cell.mineCount, cell.isOpened]);
 
   const className = useMemo(() => {
     const open = cell.isOpened ? (cell.isMine ? " mine open" : " open") : "";
