@@ -20,6 +20,7 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
       boardStore.openMines();
       gameStore.gameOver();
       cell.open();
+      boardStore.addOpenCell();
       return;
     }
     if (!gameStore.isGameStart) {
@@ -30,6 +31,7 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
       boardStore.openEmptyCells(cell.row, cell.column);
     }
     cell.open();
+    boardStore.addOpenCell();
   }, [setMine, cell, boardStore, gameStore]);
 
   const content = useMemo(() => {
