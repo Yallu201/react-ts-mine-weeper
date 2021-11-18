@@ -50,7 +50,8 @@
   border-bottom-color: var(--button-background-color);
   border-left-color: var(--button-background-color);
 }
-.mine {
+.mine,
+.check {
   background-color: black;
 }
 
