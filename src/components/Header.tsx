@@ -9,10 +9,10 @@ const Header = observer(() => {
   const onReset = useCallback(() => {
     gameStore.reset();
     boardStore.init();
-  }, [gameStore,boardStore]);
+  }, [gameStore, boardStore]);
   return (
     <div className="header-wrap">
-      <input type="text" value={gameStore.mineCount} />
+      <input type="text" value={gameStore.leftMineCount} />
       <button onClick={onReset}>reset</button>
       <input type="text" value={gameStore.seconds} />
     </div>
