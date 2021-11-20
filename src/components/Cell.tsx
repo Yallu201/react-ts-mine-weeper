@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { CellStore } from "../store";
 import { useBoardStore } from "../store/Board";
 import { useGameStore } from "../store/Game";
@@ -11,8 +11,42 @@ type CellProps = {
 const CellComponent = observer(({ cell, setMine }: CellProps) => {
   const gameStore = useGameStore();
   const boardStore = useBoardStore();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (buttonRef && buttonRef.current) {
+      buttonRef.current.addEventListener("mousedown", mouseHandler);
+      buttonRef.current.addEventListener("contextmenu", preventContextMenu);
+    }
+    function preventContextMenu(e: MouseEvent) {
+      e.preventDefault();
+    }
+    function mouseHandler(e: MouseEvent) {
+      const [LEFT, RIGHT, TOGETHER] = [1, 2, 3];
+      switch (e.buttons) {
+        // case LEFT:
+        //   break;
+        case RIGHT:
+          const offSet = cell.isChecked ? -1 : 1;
+          gameStore.addCheckCount(offSet);
+          cell.check();
+          break;
+        case TOGETHER:
+          break;
+        default:
+      }
+    }
+    return () => {
+      if (buttonRef && buttonRef.current) {
+        buttonRef.current.removeEventListener("mousedown", mouseHandler);
+        buttonRef.current.removeEventListener(
+          "contextmenu",
+          preventContextMenu
+        );
+      }
+    };
+  }, [cell]);
   const onClick = useCallback(() => {
-    if (gameStore.isGameOver) {
+    if (gameStore.isGameOver || cell.isChecked) {
       return;
     }
     if (cell.isMine) {
@@ -42,13 +76,14 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
   }, [cell.isMine, cell.mineCount, cell.isOpened]);
 
   const className = useMemo(() => {
-    const open = cell.isOpened ? (cell.isMine ? " mine open" : " open") : "";
+    const open = cell.isOpened ? " open" : "";
+    const check = cell.isChecked ? " check" : "";
     const gameOver = gameStore.isGameOver ? " red" : "";
-    return `cell${open}${gameOver}`;
-  }, [cell.isMine, cell.isOpened, gameStore.isGameOver]);
+    return `cell${open}${check}${gameOver}`;
+  }, [cell.isMine, cell.isOpened, cell.isChecked, gameStore.isGameOver]);
 
   return (
-    <button className={className} onClick={onClick}>
+    <button ref={buttonRef} className={className} onClick={onClick}>
       {content}
     </button>
   );
