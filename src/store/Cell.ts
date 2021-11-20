@@ -6,6 +6,7 @@ export default class CellStore {
   __column: CellIndex = null;
   __isOpened: boolean = false;
   __isMine: boolean = false;
+  __isChecked: boolean = false;
   __mineCount: number = 0;
 
   constructor(row: number, column: number) {
@@ -17,8 +18,10 @@ export default class CellStore {
       __column: observable,
       __isOpened: observable,
       __isMine: observable,
+      __isChecked: observable,
       __mineCount: observable,
       open: action,
+      check: action,
     });
   }
 
@@ -40,6 +43,9 @@ export default class CellStore {
   set isMine(input: boolean) {
     this.__isMine = input;
   }
+  get isChecked() {
+    return this.__isChecked;
+  }
   get mineCount(): number {
     return this.__mineCount;
   }
@@ -48,6 +54,12 @@ export default class CellStore {
   }
 
   open() {
+    if (this.__isChecked) return;
     this.__isOpened = true;
+  }
+
+  check() {
+    if (this.__isOpened) return;
+    this.__isChecked = !this.__isChecked;
   }
 }
