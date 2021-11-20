@@ -1,7 +1,8 @@
 # 지뢰찾기
 
-React.js 와 TypeScript로 제작한 게임입니다.
+React.js 와 TypeScript로 제작한 게임입니다.  
 
+[Github page 배포 링크](https://yallu201.github.io/react-ts-mine-weeper/)
 ## 게임의 룰
 
 #### 1. 난이도 선택
