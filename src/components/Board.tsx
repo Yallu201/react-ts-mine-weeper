@@ -1,11 +1,13 @@
 import { observer } from "mobx-react-lite";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useBoardStore } from "../store/Board";
 import CellComponent from "./Cell";
 import { CellIndex } from "../store/Cell";
+import { useGameStore } from "../store/Game";
 
 const Board = observer(() => {
   const board = useBoardStore();
+  const game = useGameStore();
   const setMine = useCallback(
     (row_: CellIndex, col_: CellIndex) => {
       if (board.clickCount > 0) return;
@@ -25,6 +27,11 @@ const Board = observer(() => {
     },
     [board]
   );
+  useEffect(() => {
+    if (board.isAllLeftMine) {
+      game.gameOver();
+    }
+  }, [board.isAllLeftMine]);
   return (
     <div className="cell-area-wrap">
       <div className="board">
