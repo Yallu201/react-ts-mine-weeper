@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, computed, makeObservable, observable } from "mobx";
 import { createContext, FC, useContext } from "react";
 import CellStore, { CellIndex } from "./Cell";
 import RowStore from "./Row";
@@ -23,6 +23,7 @@ export default class BoardStore {
       openEmptyCells: action,
       openCell: action,
       addOpenCell: action,
+      isAllLeftMine: computed,
     });
   }
 
@@ -40,6 +41,13 @@ export default class BoardStore {
   }
   get openCellCount(): number {
     return this.__openCellCount;
+  }
+  get isAllLeftMine(): boolean {
+    return this.__rows.every((row) => {
+      return row.cells
+        .filter((cell) => !cell.isOpened)
+        .every((cell) => cell.isMine);
+    });
   }
 
   push(row: RowStore) {
