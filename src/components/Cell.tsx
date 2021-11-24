@@ -79,8 +79,9 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
     const open = cell.isOpened ? " open" : "";
     const check = cell.isChecked ? " check" : "";
     const gameOver = gameStore.isGameOver ? " red" : "";
-    return `cell${open}${check}${gameOver}`;
-  }, [cell.isMine, cell.isOpened, cell.isChecked, gameStore.isGameOver]);
+    const color = cell.isOpened ? ` mine-count-${cell.mineCount}` : "";
+    return `cell${open}${check}${gameOver}${color}`;
+  }, [cell.isMine, cell.isOpened, cell.isChecked, cell.mineCount, gameStore.isGameOver]);
 
   return (
     <button ref={buttonRef} className={className} onClick={onClick}>
