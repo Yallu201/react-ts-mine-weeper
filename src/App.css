@@ -1,5 +1,5 @@
 .container {
-  border-width: 10px;
+  border-width: 6px;
   border-top-color: var(--border-color-white);
   border-right-color: var(--border-color-shadow);
   border-bottom-color: var(--border-color-shadow);
@@ -7,17 +7,21 @@
   border-style: solid;
 
   background-color: #c6c6c6;
-  padding: 10px;
+  padding: 12px;
 }
 
 .header-wrap,
 .cell-area-wrap {
-  border-width: 10px;
+  border-width: 6px;
   border-top-color: var(--border-color-shadow);
   border-right-color: var(--border-color-white);
   border-bottom-color: var(--border-color-white);
   border-left-color: var(--border-color-shadow);
   border-style: solid;
+}
+.header-bottom-bar {
+  height: 12px;
+  background-color: #c6c6c6;
 }
 .header-wrap {
   padding: 0.25rem;
