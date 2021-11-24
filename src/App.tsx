@@ -11,6 +11,7 @@ function App() {
       <GameProvider store={gameStore}>
         <BoardProvider store={boardStore}>
           <Header />
+          <div className="header-bottom-bar" />
           <Board />
         </BoardProvider>
       </GameProvider>
