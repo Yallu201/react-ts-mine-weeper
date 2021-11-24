@@ -41,8 +41,33 @@
   border-left-color: var(--border-color-white);
   background-color: var(--button-background-color);
   border-style: solid;
+  font-size: 1.25rem;
+  font-weight: 800;
 }
-
+.mine-count-1 {
+  color: #0000ff;
+}
+.mine-count-2 {
+  color: #569e56;
+}
+.mine-count-3 {
+  color: #ff0000;
+}
+.mine-count-4 {
+  color: #000080;
+}
+.mine-count-5 {
+  color: #9e5656;
+}
+.mine-count-6 {
+  color: #008080;
+}
+.mine-count-7 {
+  color: #000000;
+}
+.mine-count-8 {
+  color: #808080;
+}
 .cell:active,
 .open {
   border-top-color: var(--button-background-color);
