@@ -78,7 +78,7 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
   const className = useMemo(() => {
     const open = cell.isOpened ? " open" : "";
     const check = cell.isChecked ? " check" : "";
-    const gameOver = gameStore.isGameOver ? " red" : "";
+    const gameOver = gameStore.isGameOver ? cell.isChecked ? "": " red" : "";
     const color = cell.isOpened ? ` mine-count-${cell.mineCount}` : "";
     return `cell${open}${check}${gameOver}${color}`;
   }, [cell.isMine, cell.isOpened, cell.isChecked, cell.mineCount, gameStore.isGameOver]);
