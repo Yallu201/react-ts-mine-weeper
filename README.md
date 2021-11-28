@@ -1,7 +1,5 @@
 # 지뢰찾기
 
-[Github page 배포 링크](https://yallu201.github.io/react-ts-mine-weeper/)
-
 ## 게임의 룰
 
 #### 1. 난이도 선택
