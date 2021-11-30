@@ -2,6 +2,7 @@ import { action, computed, makeObservable, observable } from "mobx";
 import { createContext, FC, useContext } from "react";
 const ONE_SECOND = 1000;
 export default class GameStore {
+  __best: number = 99999;
   __seconds: number = 0;
   __mineCount: number = 10;
   __checkCount: number = 0;
@@ -10,6 +11,7 @@ export default class GameStore {
   __isGameStart: boolean = false;
   constructor() {
     makeObservable(this, {
+      __best: observable,
       __seconds: observable,
       __mineCount: observable,
       __checkCount: observable,
