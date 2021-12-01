@@ -2,6 +2,17 @@ import { action, computed, makeObservable, observable } from "mobx";
 import { createContext, FC, useContext } from "react";
 import CellStore, { CellIndex } from "./Cell";
 import RowStore from "./Row";
+
+const CURSOR = [
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [1, 0],
+  [1, 1],
+];
 export default class BoardStore {
   __clickCount: number = 0;
   __rowCount: number = 9;
@@ -141,16 +152,7 @@ export default class BoardStore {
       this.__rows[row].cells[col].open();
       this.addOpenCell();
     }
-    const CURSOR = [
-      [-1, -1],
-      [-1, 0],
-      [-1, 1],
-      [0, -1],
-      [0, 1],
-      [1, -1],
-      [1, 0],
-      [1, 1],
-    ];
+
     CURSOR.forEach(([offsetRow, offsetCol]) => {
       const nextRow = row + offsetRow;
       const nextCol = col + offsetCol;
