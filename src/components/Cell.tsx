@@ -62,7 +62,9 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
     if (cell.mineCount === 0) {
       boardStore.openEmptyCells(cell.row, cell.column);
     }
-    if (!cell.isOpened) {
+    if (cell.isOpened) {
+      boardStore.openAroundCell(cell.row, cell.column);
+    } else {
       cell.open();
       boardStore.addOpenCell();
     }
@@ -78,10 +80,16 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
   const className = useMemo(() => {
     const open = cell.isOpened ? " open" : "";
     const check = cell.isChecked ? " check" : "";
-    const gameOver = gameStore.isGameOver ? cell.isChecked ? "": " red" : "";
+    const gameOver = gameStore.isGameOver ? (cell.isChecked ? "" : " red") : "";
     const color = cell.isOpened ? ` mine-count-${cell.mineCount}` : "";
     return `cell${open}${check}${gameOver}${color}`;
-  }, [cell.isMine, cell.isOpened, cell.isChecked, cell.mineCount, gameStore.isGameOver]);
+  }, [
+    cell.isMine,
+    cell.isOpened,
+    cell.isChecked,
+    cell.mineCount,
+    gameStore.isGameOver,
+  ]);
 
   return (
     <button ref={buttonRef} className={className} onClick={onClick}>
