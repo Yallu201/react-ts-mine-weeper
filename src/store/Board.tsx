@@ -32,6 +32,7 @@ export default class BoardStore {
       init: action,
       openMines: action,
       openEmptyCells: action,
+      openAroundCell: action,
       openCell: action,
       addOpenCell: action,
       isAllLeftMine: computed,
@@ -137,6 +138,35 @@ export default class BoardStore {
 
   openEmptyCells(row_: CellIndex, col_: CellIndex) {
     this.openCell(row_, col_);
+  }
+
+  openAroundCell(row: CellIndex, col: CellIndex) {
+    if (row === null || col === null) return;
+    // 주변 check한 cell의 갯수가 mineCount와 동일한경우, 주변 cell 모두 공개
+    let aroundCellCount = 0;
+    let aroundCheckCount = 0;
+    CURSOR.forEach(([offsetRow, offsetCol]) => {
+      const nextRow = row + offsetRow;
+      const nextCol = col + offsetCol;
+      if (nextRow < 0 || nextRow >= this.__rowCount) return;
+      if (nextCol < 0 || nextCol >= this.__columnCount) return;
+      if (this.__rows[nextRow].cells[nextCol].isChecked) {
+        aroundCheckCount++;
+      }
+      aroundCellCount++;
+    });
+    if (this.__rows[row].cells[col].mineCount === aroundCheckCount) {
+      CURSOR.forEach(([offsetRow, offsetCol]) => {
+        const nextRow = row + offsetRow;
+        const nextCol = col + offsetCol;
+        if (nextRow < 0 || nextRow >= this.__rowCount) return;
+        if (nextCol < 0 || nextCol >= this.__columnCount) return;
+        if (this.__rows[nextRow].cells[nextCol].mineCount === 0) {
+          this.openCell(nextRow, nextCol);
+        }
+        this.__rows[nextRow].cells[nextCol].open();
+      });
+    }
   }
 
   openCell(row: CellIndex, col: CellIndex) {
