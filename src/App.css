@@ -24,7 +24,21 @@
   background-color: #c6c6c6;
 }
 .header-wrap {
+  display: flex;
+  width: 380px;
   padding: 0.25rem;
+}
+.header-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 auto;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.header-item button {
+  width: 100%;
+  height: 30px;
 }
 .board {
   display: flex;
