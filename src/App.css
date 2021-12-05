@@ -36,8 +36,12 @@
   font-size: 2rem;
   font-weight: bold;
 }
+.header-info {
+  justify-content: right;
+  padding-right: 1rem;
+}
 .header-item button {
-  width: 100%;
+  width: 100px;
   height: 30px;
 }
 .board {
