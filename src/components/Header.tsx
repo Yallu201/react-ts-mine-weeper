@@ -12,9 +12,11 @@ const Header = observer(() => {
   }, [gameStore, boardStore]);
   return (
     <div className="header-wrap">
-      <input type="text" value={gameStore.leftMineCount} />
-      <button onClick={onReset}>reset</button>
-      <input type="text" value={gameStore.seconds} />
+      <div className="header-item header-info">{gameStore.leftMineCount}</div>
+      <div className="header-item">
+        <button onClick={onReset}>Reset</button>
+      </div>
+      <div className="header-item header-info">{gameStore.seconds}</div>
     </div>
   );
 });
