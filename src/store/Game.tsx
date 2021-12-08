@@ -63,7 +63,11 @@ export default class GameStore {
     this.__interval = null;
   }
 
-  gameOver() {
+  gameOver(type: string) {
+    if (type === "success") {
+      const minSeconds = Math.min(this.__best, this.__seconds);
+      this.__best = minSeconds === 0 ? this.__seconds : minSeconds;
+    }
     this.__isGameOver = true;
     if (!this.__interval) return;
     clearInterval(this.__interval);
