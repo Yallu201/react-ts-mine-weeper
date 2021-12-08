@@ -52,7 +52,7 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
     if (cell.isMine) {
       // 지뢰인 경우, 게임 정지 및 모든 지뢰 표시
       boardStore.openMines();
-      gameStore.gameOver();
+      gameStore.gameOver("fail");
       return;
     }
     if (!gameStore.isGameStart) {

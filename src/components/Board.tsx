@@ -29,7 +29,7 @@ const Board = observer(() => {
   );
   useEffect(() => {
     if (board.isAllLeftMine) {
-      game.gameOver();
+      game.gameOver("success");
     }
   }, [board.isAllLeftMine]);
   return (

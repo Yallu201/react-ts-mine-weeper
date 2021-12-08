@@ -2,7 +2,7 @@ import { action, computed, makeObservable, observable } from "mobx";
 import { createContext, FC, useContext } from "react";
 const ONE_SECOND = 1000;
 export default class GameStore {
-  __best: number = 99999;
+  __best: number = 0;
   __seconds: number = 0;
   __mineCount: number = 10;
   __checkCount: number = 0;
@@ -24,6 +24,9 @@ export default class GameStore {
     });
   }
 
+  get best() {
+    return this.__best;
+  }
   get seconds() {
     return this.__seconds;
   }
@@ -60,7 +63,11 @@ export default class GameStore {
     this.__interval = null;
   }
 
-  gameOver() {
+  gameOver(type: string) {
+    if (type === "success") {
+      const minSeconds = Math.min(this.__best, this.__seconds);
+      this.__best = minSeconds === 0 ? this.__seconds : minSeconds;
+    }
     this.__isGameOver = true;
     if (!this.__interval) return;
     clearInterval(this.__interval);
