@@ -28,6 +28,9 @@
   width: 380px;
   padding: 0.25rem;
 }
+.header-best {
+  font-weight: bold;
+}
 .header-item {
   display: flex;
   justify-content: center;
