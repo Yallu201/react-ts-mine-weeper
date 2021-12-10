@@ -13,7 +13,9 @@ const Header = observer(() => {
   return (
     <>
       <div className="header-wrap">
-        <div>best: {gameStore.best}s</div>
+        <div className="header-best">
+          best: {gameStore.best === 0 ? "-" : `${gameStore.best}초`}
+        </div>
       </div>
       <div className="header-wrap">
         <div className="header-item header-info">{gameStore.leftMineCount}</div>
