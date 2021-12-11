@@ -26,6 +26,7 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
         // case LEFT:
         //   break;
         case RIGHT:
+          if (cell.isOpened) break;
           const offSet = cell.isChecked ? -1 : 1;
           gameStore.addCheckCount(offSet);
           cell.check();
