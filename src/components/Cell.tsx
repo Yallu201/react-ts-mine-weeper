@@ -23,8 +23,8 @@ const CellComponent = observer(({ cell, setMine }: CellProps) => {
     function mouseHandler(e: MouseEvent) {
       const [LEFT, RIGHT, TOGETHER] = [1, 2, 3];
       switch (e.buttons) {
-        // case LEFT:
-        //   break;
+        case LEFT:
+          break;
         case RIGHT:
           if (cell.isOpened) break;
           const offSet = cell.isChecked ? -1 : 1;
